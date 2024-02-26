@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-void Fraction::display() {
-    std::cout << numerator << "/" << denominator;
+std::ostream& operator<<(std::ostream& os, Fraction const& f1){
+    return os << f1.numerator << "/" << f1.denominator ;
 }
 
 Fraction Fraction::operator+(Fraction const& f2){
