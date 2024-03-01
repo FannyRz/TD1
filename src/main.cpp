@@ -4,7 +4,7 @@
 int main()
 {
     Fraction f1 { 3, 4 };
-    Fraction f2 { 1, 2 };
+    Fraction f2 { 1, 4 };
 
     std::cout << "f1 = ";
     std::cout << f1 ;
@@ -23,6 +23,9 @@ int main()
 
     std::cout << std::endl << "div(f1, f2) = ";
     std::cout << f1/f2 ;
+
+    std::cout << std::endl << "f1==f2 = ";
+    std::cout << (f1==f2);
 
     return 0;
 }

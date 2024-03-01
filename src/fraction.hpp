@@ -12,3 +12,4 @@ struct Fraction {
 };
 
 std::ostream& operator<<(std::ostream& os, Fraction const& f1);
+bool operator==(Fraction const& f1,Fraction const& f2);
