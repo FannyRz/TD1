@@ -33,5 +33,14 @@ int main()
     std::cout << std::endl << "f1<f2 = ";
     std::cout << (f1<f2);
 
+    std::cout << std::endl << "f1<=f2 = ";
+    std::cout << (f1<=f2);
+
+    std::cout << std::endl << "f1>f2 = ";
+    std::cout << (f1>f2);
+
+    std::cout << std::endl << "f1>=f2 = ";
+    std::cout << (f1>=f2);
+
     return 0;
 }

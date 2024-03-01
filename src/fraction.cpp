@@ -42,3 +42,15 @@ bool operator!=(Fraction const& f1,Fraction const& f2){
 bool operator<(Fraction const& f1,Fraction const& f2){
     return (static_cast<float>(f1.numerator)/static_cast<float>(f1.denominator) < static_cast<float>(f2.numerator)/static_cast<float>(f2.denominator));
 }
+
+bool operator<=(Fraction const& f1,Fraction const& f2){
+    return (f1<f2 || f1==f2);
+}
+
+bool operator>=(Fraction const& f1,Fraction const& f2){
+    return (!(f1<f2));
+}
+
+bool operator>(Fraction const& f1,Fraction const& f2){
+    return (f1>=f2 && f1!=f2);
+}
