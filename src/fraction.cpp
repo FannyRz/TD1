@@ -54,3 +54,10 @@ bool operator>=(Fraction const& f1,Fraction const& f2){
 bool operator>(Fraction const& f1,Fraction const& f2){
     return (f1>=f2 && f1!=f2);
 }
+
+Fraction Fraction::operator+=(Fraction const& f2){
+    int tmp = denominator; // il faut une variable temporaire
+    numerator = numerator * f2.denominator + f2.numerator * denominator;
+    denominator = denominator * f2.denominator;
+    return simplify(*this);    
+}
