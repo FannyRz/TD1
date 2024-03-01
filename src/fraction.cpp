@@ -34,3 +34,7 @@ Fraction Fraction::operator/(Fraction const& f2){
 bool operator==(Fraction const& f1,Fraction const& f2){
     return (f1.numerator*f2.denominator == f1.denominator*f2.numerator);
 }
+
+bool operator!=(Fraction const& f1,Fraction const& f2){
+    return !(f1==f2);
+}
