@@ -56,8 +56,13 @@ bool operator>(Fraction const& f1,Fraction const& f2){
 }
 
 Fraction Fraction::operator+=(Fraction const& f2){
-    int tmp = denominator; // il faut une variable temporaire
     numerator = numerator * f2.denominator + f2.numerator * denominator;
+    denominator = denominator * f2.denominator;
+    return simplify(*this);    
+}
+
+Fraction Fraction::operator-=(Fraction const& f2){
+    numerator = numerator * f2.denominator - f2.numerator * denominator;
     denominator = denominator * f2.denominator;
     return simplify(*this);    
 }
