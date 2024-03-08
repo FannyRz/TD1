@@ -1,0 +1,10 @@
+^C:\USERS\FANNY\DESKTOP\IMAC\S2\PROGRAMMATION\PROG\TD1\BUILD\CMAKEFILES\664AFE2E5E3DB72DFFA376746F1F0BEB\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/fanny/Desktop/IMAC/S2/Programmation/Prog/TD1 -BC:/Users/fanny/Desktop/IMAC/S2/Programmation/Prog/TD1/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/fanny/Desktop/IMAC/S2/Programmation/Prog/TD1/build/TD1_Project.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
