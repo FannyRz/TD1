@@ -1,0 +1,8 @@
+EXERCICE 3
+
+La fonction merge_sort() s'exécute entre 0.0300ms et 0.0850ms.
+La fonction s'éxecute selection_sort() entre 0.0030ms et 0.0060ms.
+La fonction sort() s'exécute entre 0.005ms et 0.006ms.
+
+Ainsi, les fonctions selection_sort() et sort() mettent autant de temps.
+En revanche, la fonction merge_sort() met plus de temps.

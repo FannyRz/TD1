@@ -11,3 +11,9 @@ void selection_sort(std::vector<int> & vec);
 void merge_sort_merge(std::vector<float> & vec, size_t const left, size_t const middle, size_t const right);
 void merge_sort(std::vector<float> & vec, size_t const left, size_t const right);
 void merge_sort(std::vector<float> & vec);
+
+//tableau aléatoire
+std::vector<int> generate_random_vector(size_t const size, int const max = 100);
+
+//dichotomie
+int search(std::vector<int> vec, int entier);

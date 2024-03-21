@@ -120,9 +120,29 @@ void merge_sort(std::vector<float> & vec) {
 }
 
 //tableau aléatoire
-
 std::vector<int> generate_random_vector(size_t const size, int const max = 100) {
     std::vector<int> vec(size);
     std::generate(vec.begin(), vec.end(), [&max]() { return std::rand() % max;} );
     return vec;
+}
+
+
+//dichotomie
+int search(std::vector<int> vec, int entier){
+    int left_index {0};
+    int right_index = vec.size()-1 ;
+    int middle {0};
+
+    while(left_index <= right_index){
+        middle = (left_index + right_index)/2;
+        if(vec[middle]==entier){
+            return middle;
+        }
+        else if (vec[middle] < entier){
+            left_index = middle + 1;
+        }else{
+            right_index = middle - 1;
+        }
+    }
+    return -1;
 }
