@@ -1,36 +1,13 @@
 #pragma once
-#include <iostream>
 
-struct Fraction {
-    unsigned int numerator;
-    unsigned int denominator;
+bool is_sorted(std::vector<int> const& vec) ;
+void display(std::vector<int> const& vec);
+void display(std::vector<float> const& vec);
 
-    /* EXERCICE 1*/
-    // Fraction operator+(Fraction const& f2);
-    // Fraction operator-(Fraction const& f2);
-    // Fraction operator*(Fraction const& f2);
-    // Fraction operator/(Fraction const& f2);
+//tri pas selection
+void selection_sort(std::vector<int> & vec);
 
-    Fraction operator+=(Fraction const& f2);
-    Fraction operator-=(Fraction const& f2);
-    Fraction operator*=(Fraction const& f2);
-    Fraction operator/=(Fraction const& f2);
-
-    float to_float() const;
-    operator float() const ;
-    
-};
-
-std::ostream& operator<<(std::ostream& os, Fraction const& f1);
-bool operator==(Fraction const& f1,Fraction const& f2);
-bool operator!=(Fraction const& f1,Fraction const& f2);
-bool operator<(Fraction const& f1,Fraction const& f2);
-bool operator<=(Fraction const& f1,Fraction const& f2);
-bool operator>(Fraction const& f1,Fraction const& f2);
-bool operator>=(Fraction const& f1,Fraction const& f2);
-
-/*EXERCICE 5*/
-Fraction operator+(Fraction f1, Fraction const& f2);
-Fraction operator-(Fraction f1, Fraction const& f2);
-Fraction operator*(Fraction f1, Fraction const& f2);
-Fraction operator/(Fraction f1, Fraction const& f2);
+//tri fusion
+void merge_sort_merge(std::vector<float> & vec, size_t const left, size_t const middle, size_t const right);
+void merge_sort(std::vector<float> & vec, size_t const left, size_t const right);
+void merge_sort(std::vector<float> & vec);

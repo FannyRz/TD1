@@ -1,123 +1,128 @@
-#include "fraction.hpp"
-#include "utils.hpp"
-
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
 
-std::ostream& operator<<(std::ostream& os, Fraction const& f1){
-    return os << f1.numerator << "/" << f1.denominator ;
+//Le tableau est trié
+bool is_sorted(std::vector<int> const& vec) {
+    return std::is_sorted(vec.begin(), vec.end()); 
 }
 
-/*EXERCICE 1*/
-// Fraction Fraction::operator+(Fraction const& f2){
-//     return simplify(
-//         { numerator * f2.denominator + f2.numerator * denominator, denominator * f2.denominator }
-//     );
-// }
-
-// Fraction Fraction::operator-(Fraction const& f2){
-//     return simplify(
-//         { numerator * f2.denominator - f2.numerator * denominator, denominator * f2.denominator}
-//     );
-// }
-
-// Fraction Fraction::operator*(Fraction const& f2){
-//     return simplify(
-//         { numerator * f2.numerator , denominator * f2.denominator}
-//     );
-// }
-
-// Fraction Fraction::operator/(Fraction const& f2){
-//     return simplify(
-//         { numerator * f2.denominator , denominator * f2.numerator}
-//     );
-// }
-/*FIN EXERCICE 1*/
-
-bool operator==(Fraction const& f1,Fraction const& f2){
-    return (f1.numerator*f2.denominator == f1.denominator*f2.numerator);
+//afficher un tableau de int
+void display(std::vector<int> const& vec){
+    std::cout << "[";
+    for(int i=0 ; i<vec.size(); i++){
+        std::cout << vec[i] << ", " ;
+    }
+    std::cout << "]" << std::endl;
 }
 
-bool operator!=(Fraction const& f1,Fraction const& f2){
-    return !(f1==f2);
+//afficher un tableau de float
+void display(std::vector<float> const& vec){
+    std::cout << "[";
+    for(int i=0 ; i<vec.size(); i++){
+        std::cout << vec[i] << ", " ;
+    }
+    std::cout << "]" << std::endl;
 }
 
-bool operator<(Fraction const& f1,Fraction const& f2){
-    return (static_cast<float>(f1.numerator)/static_cast<float>(f1.denominator) < static_cast<float>(f2.numerator)/static_cast<float>(f2.denominator));
+//tri par selection
+void selection_sort(std::vector<int> & vec){
+    if(!vec.empty()){
+
+        for( int j=0; j<vec.size(); j++){
+
+                int min {vec[j]};
+                int indice_min {j};
+
+                //on cherche le plus petit element
+                for(int i=j; i < vec.size(); i++){
+                    if(vec[i]<min){
+                        min = vec[i];
+                        indice_min = i;
+                    }
+                }
+
+                //on switch si besoin
+                if(min != vec[j]){
+                    vec[indice_min] = vec[j];
+                    vec[j] = min;
+                }
+        }
+
+    }else{
+        std::cout << "Probleme : tableau vide" << std::endl;
+    }
 }
 
-bool operator<=(Fraction const& f1,Fraction const& f2){
-    return (f1<f2 || f1==f2);
+
+//tri fusion
+
+void merge_sort_merge(std::vector<float> & vec, size_t const left, size_t const middle, size_t const right) {
+    // On crée deux vecteurs temporaires pour stocker les copies des deux sous-parties à fusionner
+    size_t const left_size { middle - left + 1 };
+    size_t const right_size { right - middle };
+    std::vector<float> left_vec(vec.begin() + left, vec.begin() + middle + 1);
+    std::vector<float> right_vec(vec.begin() + middle + 1, vec.begin() + right + 1);
+
+    // Deux index pour parcourir les deux sous-parties et remplir le vecteur original
+    size_t left_index {0};
+    size_t right_index {0};
+
+    size_t index {left};
+
+    // Tant que nous avons pas parcouru tout les éléments d'au moins une des deux sous-parties
+    while (left_index < left_size && right_index < right_size) {
+        // On compare les éléments des deux sous-parties et on place le plus petit dans le vecteur original
+        // on met à jour les index pour parcourir les sous-parties en conséquence
+        if (left_vec[left_index] < right_vec[right_index]) {
+            vec[index] = left_vec[left_index];
+            left_index ++;
+        } else {
+            vec[index] = right_vec[right_index];
+            right_index ++;
+        }
+        index ++;
+    }
+
+    // // S'il reste des éléments dans une des deux sous-parties, on les place dans le vecteur original
+    while (left_index < left_size) {
+        vec[index] = left_vec[left_index];
+        left_index ++;
+        index ++;
+    }
+    while (right_index < right_size) {
+        vec[index] = right_vec[right_index];
+        right_index ++;
+        index ++;
+    }
 }
 
-bool operator>=(Fraction const& f1,Fraction const& f2){
-    return (!(f1<f2));
+void merge_sort(std::vector<float> & vec, size_t const left, size_t const right) {
+    if (left >= right) {
+        return;
+    }
+
+    size_t middle {0};
+    middle = (right + left)/2;
+    merge_sort(vec,left,middle);
+    merge_sort(vec,middle+1,right);
+    merge_sort_merge(vec,left,middle,right);
+
+    // 1. Choix de l'index au milieu de la partition
+    // 2. Appels récursifs sur les deux sous-parties
+    // 3. Fusion des deux sous-parties
 }
 
-bool operator>(Fraction const& f1,Fraction const& f2){
-    return (f1>=f2 && f1!=f2);
+// Même mécanisme que pour le tri rapide
+void merge_sort(std::vector<float> & vec) {
+    merge_sort(vec, 0, vec.size() - 1);
 }
 
-Fraction Fraction::operator+=(Fraction const& f2){
-    numerator = numerator * f2.denominator + f2.numerator * denominator;
-    denominator = denominator * f2.denominator;
-    return simplify(*this);    
+//tableau aléatoire
+
+std::vector<int> generate_random_vector(size_t const size, int const max = 100) {
+    std::vector<int> vec(size);
+    std::generate(vec.begin(), vec.end(), [&max]() { return std::rand() % max;} );
+    return vec;
 }
-
-Fraction Fraction::operator-=(Fraction const& f2){
-    numerator = numerator * f2.denominator - f2.numerator * denominator;
-    denominator = denominator * f2.denominator;
-    return simplify(*this);    
-}
-
-Fraction Fraction::operator*=(Fraction const& f2){
-    numerator = numerator * f2.numerator;
-    denominator = denominator * f2.denominator;
-    return simplify(*this);    
-}
-
-Fraction Fraction::operator/=(Fraction const& f2){
-    numerator = numerator * f2.denominator;
-    denominator = denominator * f2.numerator;
-    return simplify(*this);    
-}
-
-/*EXERCICE 5*/
-Fraction operator+(Fraction f1, Fraction const& f2) {
-    f1 += f2;
-    return simplify(f1);
-}
-
-Fraction operator-(Fraction f1, Fraction const& f2) {
-    f1 -= f2;
-    return simplify(f1);
-}
-
-Fraction operator*(Fraction f1, Fraction const& f2) {
-    f1 *= f2;
-    return simplify(f1);
-}
-
-Fraction operator/(Fraction f1, Fraction const& f2) {
-    f1 /= f2;
-    return simplify(f1);
-}
-/*FIN EXERCICE 5*/
-
-float Fraction::to_float() const{
-    return (static_cast<float>(numerator)/static_cast<float>(denominator));
-}
-
-// Fraction::operator float() const{
-//     Fraction const* myself_ptr { this};
-//     Fraction const&  ref {*myself_ptr};
-//     return ref.to_float();
-// }
-
-Fraction::operator float() const{
-    Fraction const&  ref {*this};
-    return ref.to_float();
-}
-
-// Fraction::operator float() const {
-//     return to_float();
-// }
