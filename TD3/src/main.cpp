@@ -27,10 +27,6 @@ int main()
     // }
 
     //pour tester la dichotomie
-
-    std::cout << search({1, 2, 2, 3, 4, 8, 12}, 8) << std::endl;
-    std::cout << search({1, 2, 3, 3, 6, 14, 12, 15}, 15) << std::endl;
-    std::cout << search({2, 2, 3, 4, 5, 8, 12, 15, 16}, 16) << std::endl;
-    std::cout << search({5, 6, 7, 8, 9, 10, 11, 12, 13}, 6) << std::endl;
-    std::cout << search({1, 2, 3, 4, 5, 6, 7, 8, 9}, 10) << std::endl;
+    int res {search(array_int_trie,12)};
+    std::cout << res << std::endl;
 }
