@@ -44,6 +44,8 @@ float calcule (float rightOperand,float leftOperand,std::string const s){
         return leftOperand*rightOperand;
     }else if(s==std::string{'/'}){
         return leftOperand/rightOperand;
+    }else if(s==std::string{'^'}){
+        return pow(leftOperand,rightOperand);
     }else{
         std::cout << "operateur inconnu" << std::endl;
         return -1.f;
@@ -81,5 +83,5 @@ int main()
     std::vector<std::string> tab {separation_saisie(saisie)};
     float result {npi_evaluate(tab)};
     std::cout << "Le resultat de " << saisie << " est : " << result << std::endl;
-    
+
 }
