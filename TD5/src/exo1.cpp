@@ -5,68 +5,56 @@
 #include <cstdlib>
 
 
-std::vector<int> generate_random_vector(size_t const size, int const max = 100) {
-    std::vector<int> vec(size);
-    std::generate(vec.begin(), vec.end(), [&max]() { return std::rand() % max;} );
-    return vec;
+size_t folding_string_hash(std::string const& s, size_t max){
+    size_t somme {0};
+    for(char c : s){
+        somme += c;
+    }
+    return somme%max;
 }
 
-//afficher un tableau de int
-void display(std::vector<int> const& vec){
-    std::cout << "[";
-    for(int i=0 ; i<vec.size(); i++){
-        std::cout << vec[i] << ", " ;
+size_t folding_string_ordered_hash(std::string const& s, size_t max){
+    size_t somme {0};
+    for(int i {0}; i<s.size(); i++){
+        somme += (i+1)*s[i];  //pour eviter que pour un tab a un character, le resultat soit nul
     }
-    std::cout << "]" << std::endl;
+    return somme%max;
+}
+
+size_t puissance(size_t entier, int indice){
+    size_t result {1};
+    if(indice==0){
+        return 1;
+    }else{
+        while(indice>0){
+            result *= entier;
+            indice -= 1;
+        }
+        return result;
+    }
+}
+
+size_t polynomial_rolling_hash(const std::string& s, size_t p, size_t m){
+    size_t somme {0};
+    for(int i {0}; i<s.size(); i++){
+        somme += s[i]*puissance(p,i);  //pour eviter que pour un tab a un character, le resultat soit nul
+    }
+    return somme%m;
 }
 
 
 int main()
 {
-    // std::vector<int> array {generate_random_vector(10)};
-    // std::vector<int> array2 {1,2,3,4,5,3,2,6,4,5};
-    // display(array);
+    std::string str1 {"anti"};
+    std::string str2 {"jourbon"};
 
+    std::cout << "Le hach de " << str1 << " est "<< folding_string_hash(str1,1024) << std::endl;
+    std::cout << "Le hach de " << str2 << " est "<< folding_string_hash(str2,1024) << std::endl;
 
-    // /* Parcours du vecteur avec l'itérateur */
-    // for (std::vector<int>::iterator it { array.begin() }; it != array.end(); ++it) {
-    //     std::cout << *it << std::endl;
-    // }
+    std::cout << "Le hach ordonne de " << str1 << " est "<< folding_string_ordered_hash(str1,1024) << std::endl;
+    std::cout << "Le hach ordonne de " << str2 << " est "<< folding_string_ordered_hash(str2,1024) << std::endl;
+    
+    std::cout << "Le hach polynomial de " << str1 << " est "<< polynomial_rolling_hash(str1,10,1024) << std::endl;
+    std::cout << "Le hach polynomial de " << str2 << " est "<< polynomial_rolling_hash(str2,10,1024) << std::endl;
 
-
-    // int saisie {0};
-    // std::cout << "Entrez la valeur que vous recherche : " << std::endl;
-    // std::cin >> saisie;
-
-    // /* Recherche de l'élément saisi dans le vecteur array */
-    // auto itFind { std::find(array.begin(), array.end(), saisie) };
-
-    // /* On compare l'itérateur avec l'itérateur sur le dernier élément du vecteur */
-    // if (itFind != array.end())
-    // {
-    //     std::cout << "La valeur " << *itFind << " est presente dans le tableau." << std::endl;
-    // }
-    // else
-    // {
-    //     std::cout << "Element not found" << std::endl;
-    // }
-
-
-    // /* Nombre d'occurrence de l'élément saisie dans le vecteur array */
-    // auto itCount { std::count(array2.begin(), array2.end(), saisie) };
-    // std::cout << "La valeur " << saisie << " apparait " << itCount << " fois dans le vecteur." << std::endl;
-
-
-    // /* Tri du vecteur array */
-    // std::sort(array.begin(), array.end());
-
-    // /* Parcours du vecteur avec l'itérateur */
-    // for (int element : array)
-    // {
-    //     std::cout << element << std::endl;
-    // }
-
-    // /* Cumul des valeurs du vecteur */
-    // int somme {std::accumulate(array.begin(), array.end(),0)};
-    // std::cout << "La somme de toutes les valeurs du vecteur vaut : " << somme << std::endl;
 }
