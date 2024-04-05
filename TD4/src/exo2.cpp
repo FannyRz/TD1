@@ -11,21 +11,18 @@ int firstWord (std::string const & str){
     auto const is_space = [](char letter){ return letter == ' '; };
 
     // Recherche de l'élément " " dans str
-    auto it { std::find(str.begin(), str.end(), is_space) };
-
-    // On compare l'itérateur avec l'itérateur sur le dernier élément du vecteur
-    if (it != str.end())
-    {
-        longueur = std::distance(str.begin(),it);
-        return longueur;
+    auto it {std::find_if(str.begin(),str.end(), is_space)};
+    if(it == str.end()){
+        return str.size();
+    }else{
+        return std::distance(str.begin(),it);
     }
-    else
-    {
-        std::cout << "Element not found" << std::endl;
-        return -1;
-    }
-
 }
+
+std::vector<std::string> split_string(std::string const& str){
+    std::vector<std::string> str {};
+}
+
 
 int main(){
 
