@@ -120,8 +120,8 @@ void merge_sort(std::vector<float> & vec) {
 }
 
 //tableau aléatoire
-std::vector<int> generate_random_vector(size_t const size, int const max = 100) {
-    std::vector<int> vec(size);
+std::vector<float> generate_random_vector(size_t const size, int const max = 100) {
+    std::vector<float> vec(size);
     std::generate(vec.begin(), vec.end(), [&max]() { return std::rand() % max;} );
     return vec;
 }
