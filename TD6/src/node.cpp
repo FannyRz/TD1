@@ -1,6 +1,7 @@
 #include "node.hpp"
 
 #include <iostream>
+#include <vector>
 
 
 /* Permet d'afficher une representation ACSII dans la console d'un arbre binaire */
@@ -66,5 +67,61 @@ void Node::delete_childs(){
 }
 
 void Node::display_infixe() const{
-    
+    if(this->is_leaf()){
+        std::cout << this->value << " " ;
+    }else if(left==nullptr){
+        std::cout << this->value << " " ;
+        right->display_infixe();
+    }else if(right==nullptr){
+        left->display_infixe();
+        std::cout << this->value << " " ;
+    }else{
+        left->display_infixe();
+        std::cout << this->value << " " ;
+        right->display_infixe();
+    }
+}
+
+std::vector<Node const*> Node::prefixe() const{
+    std::vector<Node const*> res {};
+    if(this->is_leaf()){
+        res.push_back(this);
+    }else if(left==nullptr){
+        auto right_res {right->prefixe()};
+        res.push_back(this);
+        res.insert(res.end(), right_res.begin(), right_res.end());
+    }else if(right==nullptr){
+        auto left_res {left->prefixe()};
+        res.insert(res.end(), left_res.begin(), left_res.end());
+        res.push_back(this);
+    }else{
+        auto left_res {left->prefixe()};
+        auto right_res {right->prefixe()};
+        res.insert(res.end(), left_res.begin(), left_res.end());
+        res.push_back(this);
+        res.insert(res.end(), right_res.begin(), right_res.end());
+    }
+    return res;
+}
+
+void display_vector(std::vector<Node const*> tab){
+    std::cout << "[";
+    for(Node const* nodes : tab){
+        std::cout << nodes->value << ",";
+    }
+    std::cout << "]" << std::endl;
+    std::cout << std::endl;
+}
+
+Node*& most_left(Node*& node){
+    if(node->is_leaf() || node->left==nullptr){
+        std::cout << node->value << std::endl;
+        return node;
+    }else{
+        while(node->is_leaf() == false){
+            node = node->left;
+        }
+        std::cout << node->value << std::endl;
+        return node;
+    }
 }
