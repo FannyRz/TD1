@@ -168,3 +168,18 @@ void delete_tree(Node* node){
     node = nullptr;
 }
 
+int Node::min(){
+    if(this->left==nullptr){
+        return this->value;
+    }else{
+        return this->left->min();
+    }
+}
+
+int Node::max(){
+    if(this->right ==nullptr){
+        return this->value;
+    }else{
+        return this->right->max();
+    }
+}

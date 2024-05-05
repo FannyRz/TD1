@@ -17,6 +17,9 @@ struct Node {
     void delete_childs();
     void display_infixe() const;
     std::vector<Node const*> prefixe() const;
+
+    int min();
+    int max();
 };
 
 void pretty_print_left_right(Node const& node, std::string const& prefix, bool is_left);
