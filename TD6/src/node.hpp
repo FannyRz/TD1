@@ -7,6 +7,8 @@ struct Node {
     Node* left { nullptr };
     Node* right { nullptr };
 
+    bool is_root {false}; // par defaut
+
     bool is_leaf() const{
         return (left == nullptr && right == nullptr);
     };
@@ -25,3 +27,5 @@ Node* create_node(int value);
 void display_vector(std::vector<Node const*> tab);
 
 Node*& most_left(Node*& node);
+bool remove(Node*& node, int value);
+void delete_tree(Node* node);

@@ -30,13 +30,13 @@ void Node::insert(int value){
         if(this->left == nullptr){
             this->left = nouveau;
         }else{
-            left->insert(value);
+            this->left->insert(value);
         }
     }else{
         if(this->right == nullptr){
             this->right = nouveau;
         }else{
-            right->insert(value);
+            this->right->insert(value);
         }
     }
 }
@@ -54,15 +54,19 @@ int Node::height() const{
 }
 
 void Node::delete_childs(){
-    if(this->is_leaf()){
+    if(this->is_leaf() && !(this->is_root)){  //il ne faut pas que ce soit notre racine
         delete this;
     }else if(left==nullptr){
         right->delete_childs();
+        right = nullptr;
     }else if(right==nullptr){
         left->delete_childs();
+        left = nullptr;
     }else{
         left->delete_childs();
         right->delete_childs();
+        left = nullptr;
+        right = nullptr;
     }
 }
 
@@ -71,14 +75,14 @@ void Node::display_infixe() const{
         std::cout << this->value << " " ;
     }else if(left==nullptr){
         std::cout << this->value << " " ;
-        right->display_infixe();
+        this->right->display_infixe();
     }else if(right==nullptr){
-        left->display_infixe();
+        this->left->display_infixe();
         std::cout << this->value << " " ;
     }else{
-        left->display_infixe();
+        this->left->display_infixe();
         std::cout << this->value << " " ;
-        right->display_infixe();
+        this->right->display_infixe();
     }
 }
 
@@ -118,10 +122,49 @@ Node*& most_left(Node*& node){
         std::cout << node->value << std::endl;
         return node;
     }else{
-        while(node->is_leaf() == false){
+        while(!(node->is_leaf())){
             node = node->left;
         }
         std::cout << node->value << std::endl;
         return node;
     }
 }
+
+bool remove(Node*& node, int value){
+
+    if(node->value > value){
+        return remove(node->left,value);
+    } else if(node->value < value){
+        return remove(node->right,value);
+    } else if (value == node->value && node->is_leaf()) {
+        delete node;
+        node = nullptr;
+        return true;
+    } else if(value == node->value && node->left == nullptr){
+        Node* tmp = node->right;
+        delete node;
+        node = tmp;
+        return true;
+    } else if(value == node->value && node->right == nullptr){
+        Node* tmp = node->left;
+        delete node;
+        node = tmp;
+        return true;
+    } else if(value == node->value){
+        Node* tmp {};
+        tmp = most_left(node->right);
+        node->value = tmp->value;
+        return remove(node->right,node->value);
+    } else {
+        std::cout << "PB : remove impossible" << std::endl;
+        return false;
+    }
+
+}
+
+void delete_tree(Node* node){
+    node->delete_childs();
+    delete node;
+    node = nullptr;
+}
+
