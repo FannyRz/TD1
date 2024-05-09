@@ -36,8 +36,10 @@ size_t puissance(size_t entier, int indice){
 
 size_t polynomial_rolling_hash(const std::string& s, size_t p, size_t m){
     size_t somme {0};
+    size_t power {1};
     for(int i {0}; i<s.size(); i++){
-        somme += s[i]*puissance(p,i);  //pour eviter que pour un tab a un character, le resultat soit nul
+        somme += s[i]*power;  //pour eviter que pour un tab a un character, le resultat soit nul
+        power = power*p;
     }
     return somme%m;
 }
