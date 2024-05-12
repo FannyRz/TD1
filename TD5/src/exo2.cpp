@@ -76,5 +76,7 @@ std::unordered_map<std::string, float> sommeReparationEffectue(std::vector<std::
 }
 
 int main(){
+
+    return 0;
     
 }
