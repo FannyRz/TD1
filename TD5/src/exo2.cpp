@@ -98,5 +98,9 @@ void display_unordered_map_float (std::unordered_map<std::string, float> robot){
 
 int main(){
 
+    std::vector<std::pair<std::string, float>> random_robot {get_robots_fix(100)};
+    display_unordered_map_vector(robots_fixes_map(random_robot));
+    display_unordered_map_float(sommeReparationEffectue(random_robot));
+
     return 0;
 }
