@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <cstdlib>
+#include <unordered_map>
 
 std::string random_name(size_t size) {
     std::string name {""};
@@ -29,17 +30,49 @@ std::vector<std::pair<std::string, float>> get_robots_fix(size_t size) {
     return robots_fix;
 }
 
+bool robotDejaPresent(std::unordered_map<std::string, std::vector<float>> const& robots, std::string const& str){
+    return !(robots.find(str)==robots.end());
+}
+
 std::unordered_map<std::string, std::vector<float>> robots_fixes_map(std::vector<std::pair<std::string, float>> const& robots_fixes){
 
-    std::unordered_map<std::string, syd::vector<float>> myMap {};
-    for(std::pair<std::string, float>> pair : robots_fixes){
-        auto dayNumber = myMap.find(dayName);
-    if (dayNumber != myMap.end()) {
-        std::cout << "Le jour " << dayName << " est le jour numéro " << dayNumber->second << std::endl;
-    } else {
-        std::cout << "Le jour " << dayName << " n'existe pas" << std::endl;
+    std::unordered_map<std::string, std::vector<float>> myMap {};
+
+    for(int i {0}; i<robots_fixes.size(); i++){
+        std::string nom_courant {robots_fixes[i].first};
+
+        if(!(robotDejaPresent(myMap,nom_courant))){
+            std::pair<std::string, std::vector<float>> robot {};
+            robot.first = nom_courant;
+            for(int j{i}; j<robots_fixes.size();j++){
+                if(robot.first == robots_fixes[j].first){
+                    robot.second.push_back(robots_fixes[j].second);
+                }
+            }
+            myMap.insert(robot);
+        }
     }
+
+    return myMap;
+
+}
+
+float sommeVecteur (std::vector<float> vec){
+    float somme {0.f};
+    for(int i{0}; i<vec.size();i++){
+        somme = somme + vec[i];
     }
+    return somme;
+}
+
+std::unordered_map<std::string, float> sommeReparationEffectue(std::vector<std::pair<std::string, float>> robot){
+    std::unordered_map<std::string, float> resultat {};
+    std::unordered_map<std::string, std::vector<float>> robot_regroupe {robots_fixes_map(robot)};
+    for(std::pair<std::string, std::vector<float>> element : robot_regroupe ){
+        std::pair<std::string, float> robot_courant {element.first,sommeVecteur(element.second)};
+        resultat.insert(robot_courant);
+    } 
+    return resultat;
 }
 
 int main(){
