@@ -75,8 +75,28 @@ std::unordered_map<std::string, float> sommeReparationEffectue(std::vector<std::
     return resultat;
 }
 
+void display_vector (std::vector<float> vec){
+    std::cout << "["<< std::endl; 
+    for(int i{0}; i<vec.size(); i++){
+        std::cout << vec[i] << ", " << std::endl;
+    }
+    std::cout << "]"<< std::endl; 
+}
+
+void display_unordered_map_vector (std::unordered_map<std::string, std::vector<float>> robot){
+    for(std::unordered_map<std::string, std::vector<float>>::iterator it {robot.begin()}; it != robot.end(); it++){
+        std::cout << it->first << " : " ;
+        display_vector(it->second);
+    }
+}
+
+void display_unordered_map_float (std::unordered_map<std::string, float> robot){
+    for(std::unordered_map<std::string, float>::iterator it {robot.begin()}; it != robot.end(); it++){
+        std::cout << it->first << " : " << it->second << std::endl ;
+    }
+}
+
 int main(){
 
     return 0;
-    
 }
