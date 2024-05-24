@@ -2,7 +2,7 @@
 #include <vector>
 #include "graph.hpp"
 
-void displayAdjencyList( Graph::WeightedGraph G){
+void displayAdjencyList( Graph::WeightedGraph G ){
     std::cout << "{" << std::endl;
     for(int i{0}; i<G.adjacency_list.size(); i++){
         std::cout <<"{" << i << ", {" ;
