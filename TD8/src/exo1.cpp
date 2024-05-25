@@ -130,6 +130,7 @@ void displayString(std::string str){
 
 
 int main(){
+
     std::string str {"AAAABBBCCDAA"};
     std::string str2 {"AAAAAA"};
     std::string str_encoding {runLengthEncoding(str)};
@@ -140,4 +141,5 @@ int main(){
     displayString(str);
     displayString(str_encodingSpecial);
 
+    return 0;
 }
