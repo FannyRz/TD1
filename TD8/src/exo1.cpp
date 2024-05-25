@@ -61,6 +61,45 @@ std::string runLengthEncodingSpecial (std::string str){
     return res;
 }
 
+std::string betterRunLengthEncodingSpecial (std::string str){
+
+    char c {};
+    std::cout << "Rentrez le caractere special que vous souhaitez : " << std::endl;
+    std::cin >> c ;
+
+    std::string res {};
+    char compte {'1'};
+    char courant {str[0]};
+
+    for(int i{1}; i<str.size();i++){
+        if(courant != str[i]){
+            if(compte != '1'){
+                res.push_back(c);
+                res.push_back(static_cast<int>(compte));
+                res.push_back(courant);
+                compte = '1';
+                courant = str[i];
+            }else{                 // si on n'a qu'un seul caractere
+                res.push_back(courant);
+                courant = str[i];
+            }
+
+        }else{
+            compte ++;
+        }  
+    }
+    res.push_back(c);
+    res.push_back(static_cast<int>(compte));
+    res.push_back(courant);
+
+    if(res.size()>str.size()){
+        return str;
+    }else{
+        return res;
+    }
+    
+}
+
 // std::string betterReverseRunLenghtEncoding(std::string str){
 //     std::string res {};
 //     int courant {0};
@@ -92,9 +131,10 @@ void displayString(std::string str){
 
 int main(){
     std::string str {"AAAABBBCCDAA"};
+    std::string str2 {"AAAAAA"};
     std::string str_encoding {runLengthEncoding(str)};
     std::string str_unencoding {reverseRunLenghtEncoding(str_encoding)};
-    std::string str_encodingSpecial {runLengthEncodingSpecial(str)};
+    std::string str_encodingSpecial {betterRunLengthEncodingSpecial(str2)};
 
     
     displayString(str);
