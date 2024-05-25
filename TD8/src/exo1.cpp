@@ -22,6 +22,35 @@ std::string runLengthEncoding (std::string str){
     return res;
 }
 
+std::string reverseRunLenghtEncoding(std::string str){
+    std::string res {};
+    for(int i {0}; i<str.size();i=i+2){
+        for(char j {'0'}; j<str[i]; j++){
+            res.push_back(str[i+1]);
+        }
+    }
+    return res;
+}
+
+// std::string betterReverseRunLenghtEncoding(std::string str){
+//     std::string res {};
+//     int courant {0};
+//     char occurence {};
+//     for(int i {0}; i<str.size();i++){
+//         if(str[i]>=49 && str[i]<=57){   // i compris entre 0 et 9 en ASCII
+//             courant ++;
+//             occurence += str[i];
+//             std::cout << occurence << std::endl;
+//             continue;
+//         }
+        
+//         for(char j {'0'}; j< occurence; j++){
+//             res.push_back(str[i+1]);
+//         }
+//     }
+//     return res;
+// }
+
 
 void displayString(std::string str){
     std::cout << "[" ;
@@ -34,9 +63,10 @@ void displayString(std::string str){
 
 int main(){
     std::string str {"AAAABBBCCDAA"};
-    std::string res {runLengthEncoding(str)};
+    std::string str_encoding {runLengthEncoding(str)};
+    std::string str_unencoding {reverseRunLenghtEncoding(str_encoding)};
     
     displayString(str);
-    displayString(res);
+    displayString(str_encoding);
 
 }
