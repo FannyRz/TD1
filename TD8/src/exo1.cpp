@@ -32,6 +32,35 @@ std::string reverseRunLenghtEncoding(std::string str){
     return res;
 }
 
+std::string runLengthEncodingSpecial (std::string str){
+    std::string res {};
+    char compte {'1'};
+    char courant {str[0]};
+
+    for(int i{1}; i<str.size();i++){
+        if(courant != str[i]){
+            if(compte != '1'){
+                res.push_back('*');
+                res.push_back(static_cast<int>(compte));
+                res.push_back(courant);
+                compte = '1';
+                courant = str[i];
+            }else{                 // si on n'a qu'un seul caractere
+                res.push_back(courant);
+                courant = str[i];
+            }
+
+        }else{
+            compte ++;
+        }  
+    }
+    res.push_back('*');
+    res.push_back(static_cast<int>(compte));
+    res.push_back(courant);
+
+    return res;
+}
+
 // std::string betterReverseRunLenghtEncoding(std::string str){
 //     std::string res {};
 //     int courant {0};
@@ -65,8 +94,10 @@ int main(){
     std::string str {"AAAABBBCCDAA"};
     std::string str_encoding {runLengthEncoding(str)};
     std::string str_unencoding {reverseRunLenghtEncoding(str_encoding)};
+    std::string str_encodingSpecial {runLengthEncodingSpecial(str)};
+
     
     displayString(str);
-    displayString(str_encoding);
+    displayString(str_encodingSpecial);
 
 }
