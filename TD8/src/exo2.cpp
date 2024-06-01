@@ -35,11 +35,20 @@ bool operator<(Node node1, Node node2){
 }
 
 /*Q3*/
+Node* createNode(char c, size_t frequence){
+    return (new Node {c,frequence});
+}
+
+/*Q4*/
 
 void display_unordered_map(std::unordered_map<char, size_t> map){
     for(std::unordered_map<char,size_t>::iterator it {map.begin()}; it != map.end(); it++){
         std::cout << it->first << " : " << it->second << std::endl ;
     }
+}
+
+void display_node(Node* node){
+    std::cout << "char : " << node->character << ", frequence : " << node->frequency << std::endl;
 }
 
 
@@ -49,7 +58,6 @@ int main(){
 
     Node node1 {'c',static_cast<size_t>(10),new Node {'f',static_cast<size_t>(30)},new Node {'m',static_cast<size_t>(20)}};
     Node node2 {'c',static_cast<size_t>(50),new Node {'f',static_cast<size_t>(20)},new Node {'m',static_cast<size_t>(40)}}; 
-
     return 0;
 
 }
