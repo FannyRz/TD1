@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 
+/*Q1*/
 std::string runLengthEncoding (std::string str){
     std::string res {};
     char compte {'1'};
@@ -22,6 +23,7 @@ std::string runLengthEncoding (std::string str){
     return res;
 }
 
+/*Q2*/
 std::string reverseRunLenghtEncoding(std::string str){
     std::string res {};
     for(int i {0}; i<str.size();i=i+2){
@@ -32,6 +34,7 @@ std::string reverseRunLenghtEncoding(std::string str){
     return res;
 }
 
+/*Q3*/
 std::string betterReverseRunLenghtEncoding(std::string str){
     size_t count {0};
     std::string res {};
@@ -56,6 +59,7 @@ std::string betterReverseRunLenghtEncoding(std::string str){
     return res;
 }
 
+/*Q4*/
 std::string runLengthEncodingSpecial (std::string str){
     std::string res {};
     char compte {'1'};
@@ -85,6 +89,7 @@ std::string runLengthEncodingSpecial (std::string str){
     return res;
 }
 
+/*Q5*/
 std::string betterRunLengthEncodingSpecial (std::string str){
 
     char c {};
@@ -124,7 +129,23 @@ std::string betterRunLengthEncodingSpecial (std::string str){
     
 }
 
-
+/*Q6*/
+std::string reverseRunLengthEncodingSpecial(std::string str, char controle){
+    std::string res {};
+    int i {0};
+    while(i<str.size()){
+        if(str[i]==controle){
+            for(char j {'0'}; j<str[i+1]; j++){
+                res.push_back(str[i+2]);
+            }
+            i += 3;
+        }else{
+            res.push_back(str[i]);
+            i ++;
+        }
+    }
+    return res;
+}
 
 void displayString(std::string str){
     std::cout << "[" ;
@@ -142,12 +163,14 @@ int main(){
     std::string str_encoding {runLengthEncoding(str)};
     std::string str_unencoding {reverseRunLenghtEncoding(str_encoding)};
     std::string str_encodingSpecial {betterRunLengthEncodingSpecial(str2)};
+    std::string str_unencoding2 {reverseRunLengthEncodingSpecial("*4A*3B*2CD*2A",'*')};
     
 
     
-    // displayString(str);
-    // displayString(betterReverseRunLenghtEncoding("12A3B2C1D2A"));
-    // displayString(str_encodingSpecial);
+    displayString(str);
+    displayString(betterReverseRunLenghtEncoding("12A3B2C1D2A"));
+    displayString(str_encodingSpecial);
+    displayString(str_unencoding2);
 
     return 0;
 }
