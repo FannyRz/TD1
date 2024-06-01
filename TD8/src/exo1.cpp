@@ -32,6 +32,30 @@ std::string reverseRunLenghtEncoding(std::string str){
     return res;
 }
 
+std::string betterReverseRunLenghtEncoding(std::string str){
+    size_t count {0};
+    std::string res {};
+    for(int i {0}; i<str.size(); i++){
+        if(str[i]>=49 && str[i]<=57){   // str[i] est un chiffre
+            count = str[i] - '0';    //conversion du chiffre avec sa valeur ASCII pour avoir un chiffre entre 0 et 9)
+            
+            while(str[i+1]>=49 && str[i+1]<=57){
+            i += 1;
+            count *= 10;    // on multiplie par 10 car les unites deviennent les dizaines etc.
+            count += str[i]-'0';
+            }
+        }else{
+            // j'ajoute autant de fois qu'il faut la lettre pour la répétition 
+            for(int j {0}; j < count; j++){
+                res += str[i];
+            }
+            // reset le compteur à 1 
+            count = 0;
+        }        
+    }
+    return res;
+}
+
 std::string runLengthEncodingSpecial (std::string str){
     std::string res {};
     char compte {'1'};
@@ -100,29 +124,6 @@ std::string betterRunLengthEncodingSpecial (std::string str){
     
 }
 
-std::string betterReverseRunLenghtEncoding(std::string str){
-    size_t count {0};
-    std::string res {};
-    for(int i {0}; i<str.size(); i++){
-        if(str[i]>=49 && str[i]<=57){   // str[i] est un chiffre
-            count = str[i] - '0';    //conversion du chiffre avec sa valeur ASCII pour avoir un chiffre entre 0 et 9)
-            
-            while(str[i+1]>=49 && str[i+1]<=57){
-            i += 1;
-            count *= 10;    // on multiplie par 10 car les unites deviennent les dizaines etc.
-            count += str[i]-'0';
-            }
-        }else{
-            // j'ajoute autant de fois qu'il faut la lettre pour la répétition 
-            for(int j {0}; j < count; j++){
-                res += str[i];
-            }
-            // reset le compteur à 1 
-            count = 0;
-        }        
-    }
-    return res;
-}
 
 
 void displayString(std::string str){
@@ -145,7 +146,7 @@ int main(){
 
     
     // displayString(str);
-    displayString(betterReverseRunLenghtEncoding("12A3B2C1D2A"));
+    // displayString(betterReverseRunLenghtEncoding("12A3B2C1D2A"));
     // displayString(str_encodingSpecial);
 
     return 0;
