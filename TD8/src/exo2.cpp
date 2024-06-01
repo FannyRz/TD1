@@ -40,6 +40,12 @@ Node* createNode(char c, size_t frequence){
 }
 
 /*Q4*/
+Node* createSymbolNode(Node* node1, Node* node2){
+    Node* symbol {createNode('0',node1->frequency + node2->frequency)};
+    symbol->left = node1;
+    symbol->right = node2;
+    return symbol;
+}
 
 void display_unordered_map(std::unordered_map<char, size_t> map){
     for(std::unordered_map<char,size_t>::iterator it {map.begin()}; it != map.end(); it++){
@@ -58,6 +64,8 @@ int main(){
 
     Node node1 {'c',static_cast<size_t>(10),new Node {'f',static_cast<size_t>(30)},new Node {'m',static_cast<size_t>(20)}};
     Node node2 {'c',static_cast<size_t>(50),new Node {'f',static_cast<size_t>(20)},new Node {'m',static_cast<size_t>(40)}}; 
-    return 0;
+    
 
+    
+    return 0;
 }
