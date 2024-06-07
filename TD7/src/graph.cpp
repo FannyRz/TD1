@@ -25,7 +25,7 @@ void Graph::WeightedGraph::add_undirected_edge(int const from, int const to, flo
     add_directed_edge(to,from,weight);
 }
 
-Graph::WeightedGraph Graph::build_from_adjacency_matrix(std::vector<std::vector<float>> const& adjacency_matrix){
+Graph::WeightedGraph Graph::adjacency_list__from_adjacency_matrix(std::vector<std::vector<float>> const& adjacency_matrix){
     Graph::WeightedGraph res {};
     for(int i {0}; i<adjacency_matrix.size(); i++){
         res.add_vertex(i);

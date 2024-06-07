@@ -36,7 +36,7 @@ int main(){
         {0,0,0,0,0}
     };
 
-    Graph1 = Graph::build_from_adjacency_matrix(matrix);
+    Graph1 = Graph::adjacency_list__from_adjacency_matrix(matrix);
     std::cout << "Voici le liste d'adjacence du Graph1";
     // displayAdjencyList(Graph1);
 
