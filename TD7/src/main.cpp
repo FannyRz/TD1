@@ -51,9 +51,12 @@ int main(){
     Graph2.add_directed_edge(2,3,1);
     Graph2.add_directed_edge(3,4,6);
 
-    std::cout << "Voici le liste d'adjacence du Graph2";
+    std::cout << "Voici le liste d'adjacence du Graph2"<< std::endl;
     // displayAdjencyList(Graph2);
 
+
+    Graph1.print_DFS(0);
+    Graph1.print_BFS(0);
 
     return 0;
 }

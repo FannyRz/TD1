@@ -32,10 +32,14 @@ namespace Graph {
         bool operator==(WeightedGraph const& other) const = default;
         bool operator!=(WeightedGraph const& other) const = default;
 
-        void print_DFS(int const start) const;
-        void print_BFS(int const start) const;
+        std::vector<int> DFS(int const start);
+        void print_DFS(int const start);
+        std::vector<int> BFS(int const start);
+        void print_BFS(int const start);
     };
 
     WeightedGraph adjacency_list__from_adjacency_matrix(std::vector<std::vector<float>> const& adjacency_matrix);
 
 } // namespace
+
+bool estDedans (std::vector<int> tab, int entier);
